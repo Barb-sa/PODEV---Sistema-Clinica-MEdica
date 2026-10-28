@@ -1,0 +1,159 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&family=Raleway:wght@300;400;500;700&display=swap");
+
+:root {
+  --bg: #effaf1;
+  --card: #a7ccc5;
+  --ink: #2b2b2b;
+  --dark: #1f3d3a;
+  --navy: #1b2d42;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body { height: 100%; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Raleway", system-ui, sans-serif;
+}
+
+.login {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+/* ---------- Marca ---------- */
+.login__brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login__logo {
+  width: min(100%, 420px);
+  height: auto;
+}
+
+/* ---------- Cartão ---------- */
+.login__card {
+  background: var(--card);
+  border-radius: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem 2rem;
+}
+
+.login__title {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: clamp(2.5rem, 4vw, 4rem);
+  margin-bottom: 4.5rem;
+  text-align: center;
+}
+
+.login__form {
+  width: min(100%, 520px);
+}
+
+.field { margin-bottom: 1.25rem; }
+
+.field label {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin-bottom: 0.4rem;
+  padding-left: 0.1rem;
+}
+
+.field__control {
+  position: relative;
+}
+
+.field__control input {
+  width: 100%;
+  height: 56px;
+  background: transparent;
+  border: 1px solid #1d1d1d;
+  border-radius: 999px;
+  padding: 0 3.5rem 0 1.5rem;
+  font: inherit;
+  font-size: 1.1rem;
+  color: var(--ink);
+}
+
+.field__control input:focus-visible {
+  outline: 3px solid var(--dark);
+  outline-offset: 2px;
+}
+
+.field__toggle {
+  position: absolute;
+  right: 1.1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: 0;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  color: var(--ink);
+  padding: 0.25rem;
+  border-radius: 6px;
+}
+
+.field__toggle:focus-visible {
+  outline: 3px solid var(--dark);
+}
+
+.field__toggle svg { width: 28px; height: 28px; }
+
+/* ---------- Botão ---------- */
+.login__submit {
+  display: block;
+  width: calc(100% - 8px);
+  margin: 2.75rem auto 0.6rem;
+  height: 56px;
+  background: var(--dark);
+  color: #fff;
+  border: 1px solid #000;
+  border-radius: 10px;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.login__submit:hover { background: #17302d; }
+.login__submit:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+
+.login__forgot {
+  text-align: center;
+  font-size: 1.4rem;
+}
+
+.login__forgot a {
+  color: var(--dark);
+  font-weight: 700;
+  margin-left: 0.5rem;
+}
+
+/* ---------- Responsivo ---------- */
+@media (max-width: 860px) {
+  .login {
+    grid-template-columns: 1fr;
+    padding: 1rem;
+  }
+  .login__brand { padding: 1.5rem 0; }
+  .login__logo { width: min(70%, 280px); }
+  .login__card { border-radius: 28px; padding: 2.5rem 1.25rem; }
+  .login__title { margin-bottom: 2.5rem; }
+  .field label, .login__forgot { font-size: 1.15rem; }
+  .login__submit { font-size: 1.25rem; }
+}

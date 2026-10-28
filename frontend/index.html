@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CB Clinical | Acessar</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="login">
+    <section class="login__brand">
+      <!-- Exporte a logo do seu design e salve como logo-cb-clinical.svg (ou .png) -->
+      <img class="login__logo" src="logo-cb-clinical.svg" alt="CB Clinical Ultrassonografia" />
+    </section>
+
+    <section class="login__card">
+      <h1 class="login__title">Bem-Vindo!</h1>
+
+      <form class="login__form" id="login-form" novalidate>
+        <div class="field">
+          <label for="email">E-Mail</label>
+          <div class="field__control">
+            <input type="email" id="email" name="email" autocomplete="email" required />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="password">Senha</label>
+          <div class="field__control">
+            <input type="password" id="password" name="password" autocomplete="current-password" required />
+            <button type="button" class="field__toggle" id="toggle-password" aria-label="Mostrar senha" aria-pressed="false">
+              <!-- olho riscado (senha oculta) -->
+              <svg id="icon-hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M9.88 9.88a3 3 0 1 0 4.24 4.24" />
+                <path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68" />
+                <path d="M6.61 6.61A13.53 13.53 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61" />
+                <line x1="2" x2="22" y1="2" y2="22" />
+              </svg>
+              <!-- olho aberto (senha visível) -->
+              <svg id="icon-visible" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" hidden>
+                <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+                <circle cx="12" cy="12" r="3" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <button type="submit" class="login__submit">Acessar</button>
+
+        <p class="login__forgot">
+          Esqueceu a senha? <a href="/recuperar-senha">Clique Aqui</a>
+        </p>
+      </form>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
