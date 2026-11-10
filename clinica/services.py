@@ -34,14 +34,14 @@ class Secretario(Usuario):
 
     
 class Paciente(Usuario): 
-    def __init__(self, id_usuario: int, login: str, senha: str, tipo_perfil: str, nome: str, idade: int, data_nascimento: str, celular: str, email: str,):
+    def __init__(self, id_usuario: int, login: str, senha: str, tipo_perfil: str, nome: str, idade: int, data_nascimento: str, celular: str, email: str, cpf: str):
         super().__init__(id_usuario, login, senha, tipo_perfil)
         self.nome = nome
         self.idade = idade
         self.data_nascimento = data_nascimento
         self.celular = celular
         self.email = email
-
+        self.cpf = cpf
     def alterar_dados(self, novo_celular: str, novo_email: str) -> str:
         self.celular = novo_celular
         self.email = novo_email
