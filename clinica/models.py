@@ -1,6 +1,8 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Paciente(models.Model):
+    usuario = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name="Utilizador", null=True, blank=True)
     nome = models.CharField(max_length=100)
     idade = models.IntegerField()
     data_nascimento = models.DateField()
@@ -12,10 +14,22 @@ class Paciente(models.Model):
         return self.nome
 
 class Exame(models.Model):
+    medico = models.ForeignKey('Medico', on_delete=models.PROTECT, verbose_name="Médico Responsável", null=True, blank=True)
     paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
     tipo_exame = models.CharField(max_length=100)
     data_exame = models.DateField()
-    resultado = models.TextField()
+    arquivo = models.FileField(upload_to='exames/', verbose_name="Ficheiro do Exame", blank=True, null=True)
 
+    texto_laudo = models.TextField(verbose_name="Laudo do Exame", blank=True, null=True)
+    pdf_laudo = models.FileField(upload_to='laudospdf/', verbose_name="PDF do Laudo", blank=True, null=True)
+    
     def __str__(self):
         return f"{self.tipo_exame} - {self.paciente.nome}"
+
+class Medico(models.Model):
+    usuario = models.OneToOneField(User, on_delete=models.CASCADE)
+    crm = models.CharField(max_length=20, unique=True)
+    especialidade = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.nome
