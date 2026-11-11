@@ -16,6 +16,7 @@ export async function entrar(email, senha) {
   const me = await api("/me/");
   sessionStorage.setItem("perfil", me.tipo_perfil);
   sessionStorage.setItem("nome", me.nome);
+  sessionStorage.setItem("email", me.email);
   return me.tipo_perfil;
 }
 

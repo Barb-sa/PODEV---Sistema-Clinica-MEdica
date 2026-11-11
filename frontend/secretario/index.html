@@ -9,34 +9,7 @@
 </head>
 <body>
   <div class="app">
-    <aside class="sidebar">
-      <!-- Exporte a logo do seu design e salve como logo-cb-clinical.svg -->
-      <img class="sidebar__logo" src="../assets/logo_escura.png" alt="CB Clinical Ultrassonografia" />
-
-      <nav class="nav" aria-label="Menu principal">
-        <a class="nav__item" href="paciente.html">
-          <svg viewBox="0 0 40 40" fill="currentColor" aria-hidden="true">
-            <path d="M3 6h3v17h28v-4.5A5.5 5.5 0 0 0 28.5 13H15v10H12V10h16.5A8.5 8.5 0 0 1 37 18.5V34h-3v-8H6v8H3V6Z" />
-            <circle cx="10" cy="17" r="3.2" />
-          </svg>
-          Paciente
-        </a>
-        <a class="nav__item nav__item--active" href="index.html" aria-current="page">
-          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="3.2" aria-hidden="true">
-            <rect x="5" y="5" width="12" height="12" rx="1.5" />
-            <rect x="23" y="5" width="12" height="20" rx="1.5" />
-            <rect x="5" y="23" width="12" height="12" rx="1.5" />
-            <rect x="23" y="31" width="12" height="4" rx="1.5" />
-          </svg>
-          Cadastro
-        </a>
-      </nav>
-
-      <div class="sidebar__user">
-        <p class="sidebar__name">Nome Secretario</p>
-        <p class="sidebar__email">nome.secretario@gmail.com</p>
-      </div>
-    </aside>
+    <aside class="sidebar" id="sidebar" data-perfil="secretario" data-ativo="cadastro"></aside>
 
     <main class="main">
       <header class="main__header">
@@ -77,6 +50,10 @@
     </main>
   </div>
 
+  <script type="module">
+    import { montarSidebar } from "../js/sidebar.js";
+    montarSidebar();
+  </script>
   <script src="script.js"></script>
 </body>
 </html>
