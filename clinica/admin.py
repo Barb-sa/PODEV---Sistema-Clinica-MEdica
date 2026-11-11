@@ -26,4 +26,3 @@ class ExameAdmin(admin.ModelAdmin):
 class MedicoAdmin(admin.ModelAdmin):
     list_display = ('id', 'usuario', 'crm', 'especialidade')
     search_fields = ('usuario__nome', 'crm', 'especialidade')
-
