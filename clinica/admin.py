@@ -2,6 +2,7 @@ from django.contrib import admin
 
 from .models import Paciente
 from .models import Exame
+from .models import Medico
 
 @admin.register(Paciente) 
 
@@ -20,3 +21,14 @@ class ExameAdmin(admin.ModelAdmin):
     search_fields = ('tipo_exame', 'cpf', 'paciente__nome')
     list_filter = ('data_exame',)
     ordering = ('data_exame',)
+    list_display = ('id', 'paciente', 'tipo_exame', 'data_exame', 'arquivo', 'pdf_laudo',)
+    list_display_links = ('id', 'paciente')
+    search_fields = ('tipo_exame', 'paciente__nome', 'paciente__cpf')
+    ordering = ('data_exame',)
+    autocomplete_fields = ['paciente',]
+
+@admin.register(Medico)
+class MedicoAdmin(admin.ModelAdmin):
+    list_display = ('id', 'usuario', 'crm', 'especialidade')
+    search_fields = ('usuario__nome', 'crm', 'especialidade')
+
