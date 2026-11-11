@@ -10,7 +10,7 @@ class Paciente(models.Model):
     email = models.EmailField(unique=True)
     cpf = models.CharField(max_length=14, unique=True)
 
-    def __str__(self):
+    def _str_(self):
         return self.nome
 
 class Exame(models.Model):
@@ -23,7 +23,7 @@ class Exame(models.Model):
     texto_laudo = models.TextField(verbose_name="Laudo do Exame", blank=True, null=True)
     pdf_laudo = models.FileField(upload_to='laudospdf/', verbose_name="PDF do Laudo", blank=True, null=True)
     
-    def __str__(self):
+    def _str_(self):
         return f"{self.tipo_exame} - {self.paciente.nome}"
 
 class Medico(models.Model):
@@ -31,5 +31,5 @@ class Medico(models.Model):
     crm = models.CharField(max_length=20, unique=True)
     especialidade = models.CharField(max_length=100)
 
-    def __str__(self):
+    def _str_(self):
         return self.nome

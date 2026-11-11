@@ -16,6 +16,11 @@ class PacienteAdmin(admin.ModelAdmin):
 @admin.register(Exame)
 
 class ExameAdmin(admin.ModelAdmin):
+    list_display = ('id', 'paciente', 'tipo_exame', 'data_exame', 'resultado')
+    list_display_links = ('id', 'paciente')
+    search_fields = ('tipo_exame', 'cpf', 'paciente__nome')
+    list_filter = ('data_exame',)
+    ordering = ('data_exame',)
     list_display = ('id', 'paciente', 'tipo_exame', 'data_exame', 'arquivo', 'pdf_laudo',)
     list_display_links = ('id', 'paciente')
     search_fields = ('tipo_exame', 'paciente__nome', 'paciente__cpf')
