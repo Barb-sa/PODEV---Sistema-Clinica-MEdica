@@ -112,6 +112,9 @@ body {
 }
 
 .field__toggle svg { width: 28px; height: 28px; }
+.field__toggle .icon-visible { display: none; }
+.field__toggle.is-visible .icon-visible { display: block; }
+.field__toggle.is-visible .icon-hidden { display: none; }
 
 /* ---------- Botão ---------- */
 .login__submit {

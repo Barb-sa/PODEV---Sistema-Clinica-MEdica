@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CB Clinical | Secretário - Pacientes</title>
+  <link rel="stylesheet" href="style_paci.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <img class="sidebar__logo" src="logo_escura.png" alt="CB Clinical Ultrassonografia" />
+
+      <nav class="nav" aria-label="Menu principal">
+        <a class="nav__item nav__item--active" href="paciente.html" aria-current="page">
+          <svg viewBox="0 0 40 40" fill="currentColor" aria-hidden="true">
+            <path d="M3 6h3v17h28v-4.5A5.5 5.5 0 0 0 28.5 13H15v10H12V10h16.5A8.5 8.5 0 0 1 37 18.5V34h-3v-8H6v8H3V6Z" />
+            <circle cx="10" cy="17" r="3.2" />
+          </svg>
+          Paciente
+        </a>
+        <a class="nav__item" href="index.html">
+          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="3.2" aria-hidden="true">
+            <rect x="5" y="5" width="12" height="12" rx="1.5" />
+            <rect x="23" y="5" width="12" height="20" rx="1.5" />
+            <rect x="5" y="23" width="12" height="12" rx="1.5" />
+            <rect x="23" y="31" width="12" height="4" rx="1.5" />
+          </svg>
+          Cadastro
+        </a>
+      </nav>
+
+      <div class="sidebar__user">
+        <p class="sidebar__name">Nome Secretario</p>
+        <p class="sidebar__email">nome.secretario@gmail.com</p>
+      </div>
+    </aside>
+
+    <main class="main pacientes">
+      <h1 class="sr-only" style="position:absolute;left:-9999px">Pacientes</h1>
+
+      <form class="search" role="search" id="search-form">
+        <input type="search" id="search" placeholder="Buscar paciente" aria-label="Buscar paciente" autocomplete="off" />
+        <button type="button" class="icon-btn" id="sort-btn" aria-label="Ordenar: mais recentes primeiro" aria-pressed="false" title="Inverter ordem por data">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true">
+            <line x1="4" y1="10" x2="15" y2="10" /><circle cx="19" cy="10" r="3" /><line x1="23" y1="10" x2="28" y2="10" />
+            <line x1="4" y1="22" x2="9" y2="22" /><circle cx="13" cy="22" r="3" /><line x1="17" y1="22" x2="28" y2="22" />
+          </svg>
+        </button>
+        <button type="submit" class="icon-btn" aria-label="Buscar">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+            <circle cx="14" cy="14" r="9" /><line x1="21" y1="21" x2="28" y2="28" />
+          </svg>
+        </button>
+      </form>
+
+      <ul class="patient-list" id="patient-list"></ul>
+    </main>
+  </div>
+
+  <script src="paciente.js"></script>
+</body>
+</html>
