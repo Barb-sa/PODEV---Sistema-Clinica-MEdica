@@ -1,3 +1,133 @@
+import os
+from io import BytesIO
+from django.core.files.base import ContentFile
+from reportlab.lib.pagesizes import letter
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.lib import colors 
+
+def gerar_laudos_pdf(exame): 
+    
+    # criar um buffer para armazenar o PDF na memória ram
+    buffer = BytesIO()
+    
+    # configura o documento PDF
+    doc = SimpleDocTemplate(
+        buffer,
+        pagesize=letter,
+        rightmargin=40,
+        leftmargin=40,
+        topmargin=40,
+        bottommargin=40
+     )
+    # criar uma lista para armazenar os elementos do PDF
+    story = []
+
+    # obtem os styles padrão do reportlab
+    styles = getSampleStyleSheet()
+
+    estilo_titulo = ParagraphStyle(
+        'titulo_laudo',
+        parent=styles['Heading2'],
+        fontSize=12,
+        leading=14,
+        alignment=1,  
+        spaceAfter=15,
+        )
+
+    estilo_secao = ParagraphStyle(
+        'SecaoLaudo',
+        parent=styles['Heading3'],
+        fontSize=11,
+        leading=13,
+        spaceBefore=10,
+        spaceAfter=5,
+        textColor=colors.HexColor('#000000')
+    )
+
+    estilo_texto = ParagraphStyle(
+        'texto_laudo',
+        parent=styles['Normal'],
+        fontSize=10,
+        leading=14,
+        spaceAfter=6,
+        )
+
+    # extrai dados do paciente e do médico do exame.
+    paciente = exame.paciente
+    medico = exame.medico
+    convenio_texto = exame.convenio if exame.convenio else "PARTICULAR"
+    nome_medico_solicitante = medico.nome if medico and hasattr(medico, 'nome') else "Não informado"
+
+    dados_cabecalho = [
+         [Paragraph(f"<b>Paciente:</b> {paciente.nome}", estilo_texto), 
+         Paragraph(f"<b>Protocolo:</b> {exame.id}", estilo_texto)],
+        [Paragraph(f"<b>Idade:</b> {paciente.idade} anos", estilo_texto), 
+         Paragraph(f"<b>Realizado em:</b> {exame.data_exame.strftime('%d/%m/%Y')}", estilo_texto)],
+        [Paragraph(f"<b>Convênio:</b> {convenio_texto}", estilo_texto), 
+         Paragraph(f"<b>Solicitante:</b> Dr(a). {nome_medico_solicitante}", estilo_texto)]
+    ]
+   
+    tabela_cabecalho = Table(dados_cabecalho, colWidths=[270, 260])
+    tabela_cabecalho.setStyle(TableStyle([
+        ('VALIGN', (0,0), (-1,-1), 'TOP'),
+        ('BOTTOMPADDING', (0,0), (-1,-1), 2),
+    ]))
+    
+    # Adicionar o cabeçalho à nossa "história" (story)
+    story.append(tabela_cabecalho)
+    story.append(Spacer(1, 15)) # Espaço em branco a separar a secção seguinte
+
+    # Título do Exame (Centralizado e em destaque)
+    story.append(Paragraph(f"<b>{exame.tipo_exame.upper()}</b>", estilo_titulo))
+    
+    # Indicação Clínica
+    story.append(Paragraph(f"<b>INDICAÇÃO:</b> Avaliação clínica solicitada.", estilo_texto))
+    story.append(Spacer(1, 10))
+    
+    # Relatório (Texto redigido pelo médico)
+    story.append(Paragraph("<b>RELATÓRIO:</b>", estilo_secao))
+    
+    if exame.texto_laudo:
+        # Divide o texto por quebras de linha para criar tópicos automáticos
+        linhas_laudo = exame.texto_laudo.split('\n')
+        for linha in linhas_laudo:
+            if linha.strip():
+                story.append(Paragraph(f"• {linha.strip()}", estilo_texto))
+    else:
+        story.append(Paragraph("Laudo ainda não preenchido.", estilo_texto))
+        
+    story.append(Spacer(1, 10))
+    
+   
+    
+    story.append(Spacer(1, 40)) # Espaço para dar a margem da assinatura
+    
+    # Assinatura do Médico Responsável (Simbólica)
+    crm_texto = f"CRM: {medico.crm}" if medico and medico.crm else ""
+    
+    # Criamos um estilo específico centralizado para a assinatura
+    estilo_assinatura = ParagraphStyle(
+        'AssinaturaMedica',
+        parent=estilo_texto,
+        alignment=1, # Centralizado
+        spaceBefore=5
+    )
+    
+    texto_assinatura = f"<b>Dr(a). {nome_medico_solicitante}</b><br/>{crm_texto}<br/>Diagnóstico por Imagem"
+    story.append(Paragraph(texto_assinatura, estilo_assinatura))
+
+    # Compilação final e salvamento do documento no Django
+    doc.build(story)
+    buffer.seek(0)
+
+
+    nome_ficheiro = f"laudo_exame_{exame.id}.pdf"
+    exame.pdf_laudo.save(nome_ficheiro, ContentFile(buffer.read()), save=True)
+    buffer.close()
+
+
+
 class Usuario: 
     def __init__(self, id_usuario: int, login: str, senha: str, tipo_perfil: str):
         self.id_usuario = id_usuario
