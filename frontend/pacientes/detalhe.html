@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CB Clinical | Paciente</title>
+  <link rel="stylesheet" href="../css/global.css" />
+  <link rel="stylesheet" href="../css/sidebar.css" />
+  <link rel="stylesheet" href="../css/secretario_paciente.css" />
+  <link rel="stylesheet" href="../css/detalhe.css" />
+</head>
+<body>
+  <div class="app">
+    <!-- o perfil vem do login; o menu e o item ativo são montados pelo sidebar.js -->
+    <aside class="sidebar" id="sidebar" data-ativo="paciente"></aside>
+
+    <main class="main detalhe" id="detalhe">
+      <p class="vazio">Carregando...</p>
+    </main>
+  </div>
+
+  <!-- precisa ser module (usa import). Abra pelo Live Server, não com duplo clique. -->
+  <script type="module" src="detalhe.js"></script>
+</body>
+</html>

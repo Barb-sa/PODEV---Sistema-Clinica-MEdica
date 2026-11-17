@@ -24,15 +24,6 @@ body {
   overflow: hidden;
 }
 
-/* sombra suave no rodapé, como no design */
-.app::after {
-  content: "";
-  position: absolute;
-  inset: auto 0 0 0;
-  height: 70px;
-  background: linear-gradient(to bottom, transparent, rgba(60, 72, 70, 0.55));
-  pointer-events: none;
-}
 
 /* ---------- Conteúdo ---------- */
 .main { padding: 8rem 0 4rem 2.6rem; }

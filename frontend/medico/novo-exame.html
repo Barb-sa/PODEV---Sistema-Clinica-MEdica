@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CB Clinical | Novo exame</title>
+  <link rel="stylesheet" href="../css/global.css" />
+  <link rel="stylesheet" href="../css/sidebar.css" />
+  <link rel="stylesheet" href="../css/novo-exame.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar" id="sidebar" data-ativo="paciente"></aside>
+
+    <main class="main novo-exame" id="conteudo">
+      <header class="novo-exame__topo">
+        <p class="badge" id="paciente-nome">Paciente</p>
+        <h1 class="novo-exame__titulo">Novo Exame</h1>
+      </header>
+
+      <form class="novo-exame__form" id="form-exame" novalidate>
+        <!-- 1) Só esta parte aparece no início -->
+        <div class="field campo-exame">
+          <label for="tipo-exame">Exames</label>
+          <select id="tipo-exame" name="tipo_exame" required aria-controls="parte-exame">
+            <option value="">Escolha um exame</option>
+            <!-- as opções são criadas pelo novo-exame.js -->
+          </select>
+          <p class="erro" id="erro-tipo" role="alert"></p>
+        </div>
+
+        <!-- 2) Aparece depois de escolher o exame -->
+        <div id="parte-exame" hidden>
+          <div class="field field--obs">
+            <label class="rotulo rotulo--centro" for="observacoes">Observações</label>
+            <textarea id="observacoes" name="observacoes" rows="8"></textarea>
+          </div>
+
+          <div class="field field--arquivos">
+            <span class="rotulo">Inserir imagens</span>
+
+            <input type="file" id="arquivos" class="visualmente-oculto" multiple
+                   accept="image/jpeg,image/png,application/pdf,video/mp4,video/quicktime,video/webm,.jpg,.jpeg,.png,.pdf,.mp4,.mov,.webm" />
+            <label class="dropzone" id="dropzone" for="arquivos">
+              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 28a7 7 0 0 1-.9-13.9A9 9 0 0 1 28.4 12 7.5 7.5 0 0 1 29 28" />
+                <path d="M20 33V20" />
+                <path d="M15.5 24.5 20 20l4.5 4.5" />
+              </svg>
+              <span class="dropzone__textos">
+                <strong>Selecione arquivos ou arraste até aqui</strong>
+                <small id="ajuda-arquivos"></small>
+              </span>
+              <span class="dropzone__botao">Selecionar</span>
+            </label>
+
+            <p class="erro" id="erro-arquivos" role="alert"></p>
+            <ul class="arquivos" id="lista-arquivos"></ul>
+          </div>
+
+          <button type="submit" class="form__submit" id="enviar">Enviar informações</button>
+          <p class="erro erro--centro" id="erro-envio" role="alert"></p>
+        </div>
+      </form>
+
+      <!-- Mensagem de sucesso (aparece no lugar do formulário) -->
+      <section class="sucesso" id="sucesso" tabindex="-1" hidden>
+        <p>Exame enviado com sucesso.</p>
+        <div class="sucesso__acoes">
+          <a class="primario" id="link-voltar" href="../pacientes/lista.html">Voltar ao paciente</a>
+          <a class="secundario" id="link-outro" href="novo-exame.html">Inserir outro exame</a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- precisa ser module (usa import). Abra pelo Live Server, não com duplo clique. -->
+  <script type="module" src="novo-exame.js"></script>
+</body>
+</html>

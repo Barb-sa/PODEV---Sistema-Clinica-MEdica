@@ -1,0 +1,202 @@
+/* ---------- Novo exame (médico) ----------
+   Usa .badge, .field e .form__submit do global.css. */
+
+[hidden] { display: none !important; }
+
+.novo-exame { padding: 3rem 0 4rem 2.6rem; min-width: 0; }
+
+/* ----- topo: nome do paciente + título ----- */
+.novo-exame__titulo {
+  margin-top: 2.2rem;
+  padding-bottom: 1.3rem;
+  border-bottom: 1px solid var(--line);
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.novo-exame__form { max-width: 880px; margin: 2.4rem 2.6rem 0 0.6rem; }
+
+/* ----- campos ----- */
+.campo-exame { max-width: 540px; }
+
+.field select,
+.field textarea {
+  width: 100%;
+  background: #fff;
+  border: 1px solid var(--line);
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.95rem;
+}
+
+.field select {
+  height: 48px;
+  padding: 0 2.6rem 0 0.9rem;
+  border-radius: 8px;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%231f3d3a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m3 6 5 5 5-5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.9rem center;
+  background-size: 14px;
+  cursor: pointer;
+}
+
+.field textarea {
+  min-height: 16rem;
+  width: 70rem;
+  padding: 0.9rem 1rem;
+  border-radius: 10px;
+  resize: vertical;
+}
+
+.field select:focus-visible,
+.field textarea:focus-visible { outline: 3px solid var(--dark); outline-offset: 1px; }
+
+.field--obs { 
+    margin-top: 2.2rem;}
+.field--arquivos { margin-top: 2.2rem; }
+
+.rotulo {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: capitalize;
+}
+.rotulo--centro { text-align: center; }
+
+/* ----- área de envio de arquivos ----- */
+.field .visualmente-oculto {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.field .dropzone {
+  display: flex;
+  align-items: center;
+  margin: 5% 0 0 17%;
+  font-size: inherit;
+  font-weight: inherit;
+  gap: 1rem;
+  max-width: 540px;
+  padding: 1rem 1.25rem;
+  background: #fff;
+  border: 2px dashed #b4c4be;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.field .dropzone:hover,
+.field .dropzone--ativa { border-color: var(--dark); background: #f6fbf8; }
+
+.field .visualmente-oculto:focus-visible + .dropzone { outline: 3px solid var(--dark); outline-offset: 3px; }
+
+.dropzone svg { width: 38px; height: 38px; flex: none; color: var(--dark); }
+
+.dropzone__textos { display: flex; flex-direction: column; gap: 0.2rem; flex: 1; min-width: 0; }
+.dropzone__textos strong { font-size: 0.9rem; font-weight: 600; }
+.dropzone__textos small { font-size: 0.75rem; line-height: 1.4; color: #55625e; }
+
+.dropzone__botao {
+  flex: none;
+  padding: 0.45rem 1rem;
+  border: 1.5px solid var(--dark);
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--dark);
+}
+
+.arquivos {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 540px;
+  margin-top: 0.9rem;
+}
+
+.arquivos li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.55rem 0.9rem;
+  background: #fff;
+  border-radius: 10px;
+  font-size: 0.9rem;
+}
+
+.arquivos__nome { flex: 1; min-width: 0; overflow-wrap: anywhere; font-weight: 500; }
+.arquivos__tamanho { flex: none; font-size: 0.8rem; color: #55625e; white-space: nowrap; }
+
+.arquivos button {
+  flex: none;
+  padding: 0.25rem 0.4rem;
+  background: none;
+  border: 0;
+  border-radius: 4px;
+  color: var(--dark);
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.arquivos button:focus-visible { outline: 3px solid var(--dark); }
+
+/* ----- botão enviar e mensagens ----- */
+.novo-exame .form__submit { margin-top: 2.6rem; }
+.novo-exame .form__submit:disabled { opacity: 0.6; cursor: progress; }
+
+.erro { margin-top: 0.4rem; font-size: 0.85rem; font-weight: 500; color: #9b1c1c; }
+.erro:empty { display: none; }
+.erro__linha { display: block; }
+.erro--centro { text-align: center; margin-top: 1rem; }
+
+.aviso { margin-top: 3rem; font-size: 1.05rem; }
+.aviso a { color: var(--dark); font-weight: 600; }
+
+/* ----- sucesso ----- */
+.sucesso {
+  max-width: 540px;
+  margin: 2.6rem 0 0 0.6rem;
+  padding: 1.75rem 2rem;
+  background: var(--side);
+  border-radius: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.22);
+}
+.sucesso:focus { outline: none; }
+.sucesso p { margin-bottom: 1.25rem; font-size: 1.15rem; font-weight: 600; }
+.sucesso__acoes { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+.sucesso a {
+  display: inline-flex;
+  align-items: center;
+  height: 48px;
+  padding: 0 1.5rem;
+  border-radius: 999px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.sucesso .primario { background: var(--dark); color: #fff; }
+.sucesso .primario:hover { background: #17302d; }
+.sucesso .secundario { border: 1.5px solid var(--dark); color: var(--dark); }
+.sucesso .secundario:hover { background: rgba(31, 61, 58, 0.1); }
+.sucesso a:focus-visible { outline: 3px solid var(--dark); outline-offset: 3px; }
+
+/* ---------- Responsivo ---------- */
+@media (max-width: 860px) {
+  .novo-exame { padding: 1.5rem 1.25rem 5rem; }
+  .novo-exame__titulo { margin-top: 1.5rem; }
+  .novo-exame__form { margin: 1.75rem 0 0; }
+  .dropzone { flex-wrap: wrap; }
+  .sucesso { margin-left: 0; }
+}

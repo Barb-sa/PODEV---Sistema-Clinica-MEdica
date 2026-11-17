@@ -1,9 +1,9 @@
 // Troque este array pelos dados da sua API
 const pacientes = [
-  { id: 1, nome: "Ana Silva", data: "2023-01-01T12:30" },
-  { id: 2, nome: "Ana Silva", data: "2023-01-01T12:30" },
-  { id: 3, nome: "Ana Silva", data: "2023-01-01T12:30" },
-  { id: 4, nome: "Ana Silva", data: "2023-01-01T12:30" },
+  { id: 1, nome: "Ana Silva", data: "2023-03-01T12:30" },
+  { id: 2, nome: "barbara ", data: "2023-01-01T12:30" },
+  { id: 3, nome: "cicero ", data: "2023-08-01T12:30" },
+  { id: 4, nome: "fulana Silva", data: "2023-01-01T12:30" },
   { id: 5, nome: "Ana Silva", data: "2023-01-01T12:30" },
   { id: 6, nome: "Ana Silva", data: "2023-01-01T12:30" },
 ];
@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const li = document.createElement("li");
       const a = document.createElement("a");
       a.className = "patient";
-      a.href = `paciente-detalhe.html?id=${p.id}`; // ajuste para a sua rota
+      a.href = `detalhe.html?id=${p.id}`;
       a.innerHTML = `
         <span class="patient__name"></span>
         <span class="patient__when"><time>${fmtData(p.data)}</time><time>${fmtHora(p.data)}</time></span>`;
@@ -57,6 +57,10 @@ document.addEventListener("DOMContentLoaded", () => {
     );
     render();
   });
+
+  // busca vinda da tela de detalhe (lista.html?q=ana)
+  const q = new URLSearchParams(location.search).get("q");
+  if (q) search.value = q;
 
   render();
 });

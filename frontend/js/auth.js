@@ -32,3 +32,11 @@ export function sair() {
   sessionStorage.clear();
   window.location.href = "../login/index.html";
 }
+
+export function aplicarPermissoes() {
+  const perfil = sessionStorage.getItem("perfil");
+  document.querySelectorAll("[data-perfis]").forEach((el) => {
+    const permitidos = el.dataset.perfis.split(" ");
+    if (!permitidos.includes(perfil)) el.remove();
+  });
+}
