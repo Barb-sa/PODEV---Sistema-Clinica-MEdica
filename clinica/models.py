@@ -13,6 +13,20 @@ class Paciente(models.Model):
 
     def __str__(self):
         return self.nome
+    def save(self, *args, **kwargs):
+        # Só executa na criação, se ainda não houver um User vinculado
+        if not self.usuario:
+            cpf_limpo = ''.join(filter(str.isdigit, self.cpf))
+            user = User.objects.create_user(
+                username=self.email,  # Usando o email como username
+                email=self.email,
+                password=cpf_limpo,  # Senha padrão inicial
+                first_name=self.nome.split()[0],
+                is_staff=False,      # Bloqueia acesso ao /admin/
+                is_superuser=False
+            )
+            self.usuario = user
+        super().save(*args, **kwargs)
 
 class Exame(models.Model):
     medico = models.ForeignKey('Medico', on_delete=models.PROTECT, verbose_name="Médico Responsável", null=True, blank=True)

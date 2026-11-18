@@ -6,16 +6,15 @@ from .models import Medico
 from .models import Secretaria
 
 @admin.register(Paciente) 
-
 class PacienteAdmin(admin.ModelAdmin):
     list_display = ('id', 'nome', 'idade', 'data_nascimento', 'celular', 'email', 'cpf')
     list_display_links = ('id', 'nome')
     search_fields = ('nome', 'email', 'cpf')
     list_filter = ('idade',)
     ordering = ('nome',)
+    exclude = ('usuario',)
 
 @admin.register(Exame)
-
 class ExameAdmin(admin.ModelAdmin):
     list_display = ('id', 'paciente', 'tipo_exame', 'data_exame', 'resultado')
     list_display_links = ('id', 'paciente')

@@ -19,10 +19,27 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from django.shortcuts import redirect
+from django.contrib.auth import views as auth_views
+from clinica import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', lambda request: redirect('admin/', permanent=False)),
+    path('', lambda request: redirect('login/', permanent=False)),
+    path('login/', auth_views.LoginView.as_view(template_name='login/index.html'), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
+
+    # Alteração de Senha pelo Paciente
+    path(
+        'alterar-senha/',
+        auth_views.PasswordChangeView.as_view(
+            template_name='alterar_senha.html',
+            success_url='/meus-exames/'
+        ),
+        name='alterar_senha'
+    ),
+
+    # Portal de Exames do Paciente
+    path('meus-exames/', views.listar_exames_paciente, name='meus_exames'),
 ]
 
 # Para ter acesso ao pdf gerado.

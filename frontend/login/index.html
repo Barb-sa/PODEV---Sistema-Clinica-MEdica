@@ -1,26 +1,35 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>CB Clinical | Acessar</title>
-  <link rel="stylesheet" href="style.css?v=3" />
+  <link rel="stylesheet" href="{% static 'login/style.css' %}" />
 </head>
 <body>
   <main class="login">
     <section class="login__brand">
       <!-- Exporte a logo do seu design e salve como logo-cb-clinical.svg (ou .png) -->
-      <img class="login__logo" src="../assets/logo_cb.png" alt="CB Clinical Ultrassonografia" />
+      <img class="login__logo" src="{% static 'assets/logo_cb.png' %}" alt="CB Clinical Ultrassonografia" />
     </section>
 
     <section class="login__card">
       <h1 class="login__title">Bem-Vindo!</h1>
 
-      <form class="login__form" id="login-form" novalidate>
+      {% if form.errors %}
+        <p style="color: #d93025; font-size: 0.9rem; margin-bottom: 1rem; text-align: center;">
+          E-mail ou senha inválidos. Tente novamente.
+        </p>
+      {% endif %}
+
+      <form class="login__form" id="login-form" method="post" novalidate>
+        {% csrf_token %}
+
         <div class="field">
           <label for="email">E-Mail</label>
           <div class="field__control">
-            <input type="email" id="email" name="email" autocomplete="email" required />
+            <input type="email" id="email" name="username" autocomplete="email" required />
           </div>
         </div>
 
@@ -54,6 +63,6 @@
     </section>
   </main>
 
-  <script src="script.js?v=3"></script>
+  <script src="{% static 'login/script_logo.js' %}"></script>
 </body>
 </html>
