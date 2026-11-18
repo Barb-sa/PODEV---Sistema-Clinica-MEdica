@@ -14,11 +14,17 @@ const ICONES = {
 // href relativo a uma página dentro de qualquer pasta de primeiro nível
 const MENUS = {
   secretario: [
-    { chave: "paciente", texto: "Paciente", href: "../secretario/paciente.html", icone: "cama" },
-    { chave: "cadastro", texto: "Cadastro", href: "../secretario/index.html", icone: "grade" },
+    { chave: "paciente", texto: "Paciente", href: "../pacientes/lista.html", icone: "cama" },
+    { chave: "cadastro", texto: "Cadastro", href: "../pacientes/cadastro.html", icone: "grade" },
   ],
   medico: [
-    { chave: "paciente", texto: "Paciente", href: "../medico/index.html", icone: "cama" },
+    { chave: "paciente", texto: "Paciente", href: "../pacientes/lista.html", icone: "cama" },
+    { chave: "cadastro", texto: "Cadastro", href: "../pacientes/cadastro.html", icone: "grade" },
+  ],
+  admin: [
+    { chave: "paciente", texto: "Paciente", href: "../pacientes/lista.html", icone: "cama" },
+    { chave: "cadastro", texto: "Cadastro", href: "../pacientes/cadastro.html", icone: "grade" },
+    { chave: "usuarios", texto: "Usuários", href: "../admin/usuarios.html", icone: "grade" },
   ],
   paciente: [
     { chave: "perfil", texto: "Perfil", href: "../paciente/index.html", icone: "cama" },
@@ -36,7 +42,9 @@ export function montarSidebar() {
   const alvo = document.querySelector("#sidebar");
   if (!alvo) return;
 
-  const perfil = alvo.dataset.perfil;
+  const perfil = alvo.dataset.perfil
+  || sessionStorage.getItem("perfil")?.toLowerCase()
+  || "secretario";   // TEMPORÁRIO: só para ver o menu sem login
   const ativo = alvo.dataset.ativo;
 
   const links = (MENUS[perfil] || [])
@@ -61,4 +69,6 @@ export function montarSidebar() {
     sessionStorage.getItem("nome") || padrao.nome || "";
   alvo.querySelector(".sidebar__email").textContent =
     sessionStorage.getItem("email") || padrao.email || "";
+
+  
 }

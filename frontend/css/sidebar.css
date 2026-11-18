@@ -2,7 +2,7 @@
   background: var(--side);
   display: flex;
   flex-direction: column;
-  padding-top: 2.5rem;
+  padding-top: 15px;
 }
 
 .sidebar__logo {

@@ -1,0 +1,114 @@
+/* ---------- Detalhe do paciente ----------
+   Usa .search e .icon-btn de secretario_paciente.css
+   (carregue este arquivo DEPOIS dele). */
+
+.detalhe { padding: 2.6rem 5.5rem 5rem 6.3rem; min-width: 0; } /* min-width: 0 deixa a tabela rolar por dentro, sem esticar a página */
+/* sem barra de busca (secretário), o conteúdo começa mais abaixo, como no Figma */
+.detalhe--sem-busca { padding-top: 8rem; }
+
+.detalhe .search { width: 100%; margin: 0 0 3.2rem; }
+
+/* ----- cabeçalho com os dados do paciente ----- */
+.detalhe__nome {
+  font-size: 1.75rem;
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: 0.7rem;
+}
+
+.detalhe__info {
+  list-style: none;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 2;
+}
+
+/* Idade e CPF na mesma linha, separados */
+.detalhe__linha { display: flex; flex-wrap: wrap; gap: 0 4rem; }
+
+/* ----- botão "Inserir Novo Exame" ----- */
+.detalhe__acoes {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.6rem;
+}
+
+.btn-pilula {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 56px;
+  padding: 0 1.9rem;
+  background: var(--dark);
+  color: #fff;
+  border-radius: 999px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.btn-pilula:hover { background: #17302d; }
+.btn-pilula:focus-visible { outline: 3px solid var(--dark); outline-offset: 3px; }
+
+/* ----- tabela de exames ----- */
+.exames {
+  max-width: 960px;
+  margin: 5% 0 0 17%;
+  padding: 1.9rem 1.5rem 2.4rem;
+  background: var(--side);
+  border-radius: 28px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.22);
+  overflow-x: auto;
+}
+
+.exames table { width: 100%; min-width: 520px; border-collapse: collapse; }
+
+.exames th {
+  padding: 0.5rem 0.75rem 1.15rem;
+  font-size: 1.35rem;
+  font-weight: 600;
+  text-align: center;
+  border-bottom: 1.5px solid #111;
+}
+
+.exames td {
+  padding: 1.3rem 0.75rem;
+  font-size: 1.05rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* a primeira coluna (Data) fica alinhada à esquerda */
+.exames th:first-child,
+.exames td:first-child { text-align: left; padding-left: 1.7rem; }
+
+.exames time + time { margin-left: 0.8rem; }
+
+.exames__vazio { padding: 2.2rem 0.75rem; }
+
+.laudo {
+  color: var(--ink);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.laudo:hover { text-decoration: underline; }
+.laudo:focus-visible { outline: 3px solid var(--dark); outline-offset: 3px; border-radius: 4px; }
+.laudo--pendente { font-weight: 500; opacity: 0.6; }
+
+.vazio { text-align: center; font-size: 1.05rem; padding: 3rem 0; }
+.vazio a { color: var(--dark); font-weight: 600; }
+
+/* ---------- Responsivo ---------- */
+@media (max-width: 860px) {
+  .detalhe { padding: 1.5rem 1.25rem 5rem; }
+  .detalhe--sem-busca { padding-top: 2rem; }
+  .detalhe .search { margin-bottom: 1.75rem; }
+  .detalhe__linha { gap: 0 2rem; }
+  .detalhe__acoes { justify-content: stretch; }
+  .btn-pilula { width: 100%; }
+  .exames { margin-left: 0; padding: 1.25rem 0.5rem 1.5rem; border-radius: 22px; }
+  .exames th { font-size: 1.05rem; }
+  .exames td { font-size: 0.95rem; }
+}
